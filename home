@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>我爱燕子</title>
+  <style>
+  /* 流星容器（覆盖整个页面） */
+  .meteor-shower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 置于背景层 */
+    overflow: hidden;
+    background: #0a0e17; /* 深色星空背景 */
+  }
+
+  /* 单个流星样式 */
+  .meteor {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 1px #7fc1ff;
+    animation: fall linear infinite;
+  }
+
+  /* 流星动画 */
+  @keyframes fall {
+    from {
+      transform: translateX(0) translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(500px) translateY(300px);
+      opacity: 0;
+    }
+  }
+
+  /* 动态生成流星（通过CSS变量控制） */
+  .meteor:nth-child(1) {
+    top: 10%;
+    left: 50%;
+    animation-duration: 2s;
+    animation-delay: 0s;
+  }
+  .meteor:nth-child(2) {
+    top: 30%;
+    left: 20%;
+    animation-duration: 3s;
+    animation-delay: 1s;
+  }
+  /* 更多流星... */
+</style>
+ <style>
+  /* 容器样式保持不变 */
+  .runner-container {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+  }
+  
+  /* 小猪角色 */
+  .pig-runner {
+    width: 80px;
+    height: 60px;
+    position: absolute;
+    bottom: 10px;
+    left: -80px;
+    animation: run 10s linear infinite;
+  }
+  
+  /* 小猪身体 */
+  .pig-body {
+    width: 60px;
+    height: 40px;
+    background: #FFB6C1;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  /* 猪鼻子 */
+  .pig-nose {
+    width: 20px;
+    height: 15px;
+    background: #FF69B4;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    left: 40px;
+  }
+  
+  /* 猪耳朵 */
+  .pig-ear {
+    width: 15px;
+    height: 20px;
+    background: #FFB6C1;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+  }
+  .pig-ear.left { left: 5px; transform: rotate(-30deg); }
+  .pig-ear.right { right: 5px; transform: rotate(30deg); }
+  
+  /* 腿（跑步动态效果） */
+  .pig-leg {
+    width: 8px;
+    height: 20px;
+    background: #FFB6C1;
+    position: absolute;
+    bottom: -15px;
+    animation: legMove 0.3s infinite alternate;
+  }
+  .pig-leg.front { left: 15px; }
+  .pig-leg.back { right: 15px; animation-delay: 0.15s; }
+  
+  @keyframes legMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+  }
+  
+  /* 原有跑步动画 */
+  @keyframes run {
+    0% { left: -80px; transform: scaleX(1); }
+    49% { transform: scaleX(1); }
+    50% { left: 100%; transform: scaleX(-1); }
+    99% { transform: scaleX(-1); }
+    100% { left: -80px; transform: scaleX(1); }
+  }
+</style>
+
+<div class="runner-container">
+  <div class="pig-runner">
+    <div class="pig-body">
+      <div class="pig-ear left"></div>
+      <div class="pig-ear right"></div>
+      <div class="pig-nose"></div>
+      <div class="pig-leg front"></div>
+      <div class="pig-leg back"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 在<body>开头添加 -->
+<div class="meteor-shower">
+  <div class="meteor"></div>
+  <div class="meteor"></div>
+  <!-- 添加更多<div>或使用JS生成 -->
+</div>
+  <style>
+    /* 新增Q版字体（需先加载字体） */
+    @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+    
+    body {
+      font-family: 'Ma+Shan+Zheng', cursive, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #fff5f7; /* 浅粉色背景 */
+    }
+    
+    /* 大标题样式 */
+    .welcome-title {
+      font-family: 
+    "Comic Sans MS",  /* Windows/Mac自带圆体 */
+    "Marker Felt",    /* Mac可爱字体 */
+    "华康圆体",        /* 部分中文系统自带 */
+    cursive;          /* 通用手写字体回退 */
+      font-size: 4rem;         /* 超大字号 */
+      color: #ff6b9a;          /* 粉红色 */
+      text-shadow: 3px 3px 0 #ffd6e7; /* 粉色阴影 */
+      margin: 30px 0;
+      transform: rotate(-2deg); /* 轻微倾斜 */
+      display: inline-block;
+      animation: bounce 1s infinite alternate;
+    }
+    
+    /* 按钮保持原样 */
+   .game-button {
+  display: block;              /* 关键：改为块级元素 */
+  padding: 15px 30px;
+  background: #ff9ebb;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  margin: 30px auto;           /* 现在可以水平居中 */
+  width: fit-content;          /* 让宽度自适应文字内容 */
+}
+    .game-button {
+  transition: all 0.3s;        /* 动画过渡 */
+}
+
+/* 悬停效果 */
+.game-button:hover {
+  transform: translateY(-2px); /* 上浮2px */
+  box-shadow: 0 6px 0 #d45d84; /* 阴影变大 */
+}
+
+/* 点击效果 */
+.game-button:active {
+  transform: translateY(2px);  /* 下沉2px */
+  box-shadow: 0 2px 0 #d45d84;  /* 阴影缩小 */
+}
+
+    /* 弹跳动画 */
+    @keyframes bounce {
+      from { transform: translateY(0) rotate(-2deg); }
+      to { transform: translateY(-10px) rotate(-2deg); }
+    }
+  </style>
+</head>
+<body>    
+  <!-- 新标题 -->
+  <h1 class="welcome-title">李新燕的私人网站</h1>
+  
+  <!-- 按钮 -->
+  <a href="snake/" class="game-button">贪吃蛇</a>
+  <!-- 按钮 -->
+  <a href="gangqinkuai/" class="game-button">钢琴块</a>
+  <!-- 按钮 -->
+  <a href="daan/" class="game-button">答案之书</a>
+  <!-- 按钮 -->
+  <a href="yeye/" class="game-button">爷爷的相册</a>
+</body>
+</html>
