@@ -83,7 +83,7 @@
         <div class="controls">
             <div>分数: <span id="score">0</span></div>
             <button id="startBtn">开始游戏</button>
-            <button id="restartBtn">重新开始</button>
+            <button id="restartBtn" style="display:none;">重新开始</button>
         </div>
         <div id="mobileControls">
             <div class="arrow-row">
@@ -129,7 +129,7 @@
         let isGameRunning = false;
         const WIN_SCORE = 150;
 
-        // 初始化游戏
+        // 初始化游戏（仅重置数据，不开始游戏）
         function initGame() {
             snake = [
                 {x: 200, y: 200},
@@ -141,10 +141,10 @@
             score = 0;
             scoreElement.textContent = score;
             generateFood();
-            isGameRunning = true;
+            draw(); // 只绘制初始状态
         }
 
-        // 生成食物（确保不与蛇身重叠）
+        // 生成食物
         function generateFood() {
             const maxX = Math.floor(canvas.width / gridSize) - 1;
             const maxY = Math.floor(canvas.height / gridSize) - 1;
@@ -164,7 +164,7 @@
             food = newFood;
         }
 
-        // 检测食物碰撞（中心点距离检测）
+        // 检测食物碰撞
         function checkFoodCollision(head) {
             const headCenterX = head.x + gridSize/2;
             const headCenterY = head.y + gridSize/2;
@@ -179,7 +179,6 @@
 
         // 绘制游戏
         function draw() {
-            // 清空画布
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             // 绘制食物
@@ -190,7 +189,6 @@
             ctx.fillStyle = 'green';
             snake.forEach((segment, index) => {
                 ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
-                // 蛇头标记
                 if (index === 0) {
                     ctx.fillStyle = '#2E7D32';
                     ctx.beginPath();
@@ -205,6 +203,8 @@
         function endGame(isWin = false) {
             clearInterval(gameInterval);
             isGameRunning = false;
+            restartBtn.style.display = 'none';
+            startBtn.style.display = 'block';
             gameOverDiv.style.display = 'flex';
             gameOverText.textContent = isWin ? 
                 '恭喜通关！获得150分！' : '游戏结束！得分: ' + score;
@@ -231,7 +231,6 @@
                 score += 10;
                 scoreElement.textContent = score;
                 
-                // 通关检测
                 if (score >= WIN_SCORE) {
                     endGame(true);
                     return;
@@ -245,17 +244,18 @@
 
         // 游戏循环
         function gameLoop() {
-            if (isGameRunning) {
-                update();
-                draw();
-            }
+            update();
+            draw();
         }
 
         // 开始游戏
         function startGame() {
             if (isGameRunning) return;
             initGame();
+            isGameRunning = true;
             gameOverDiv.style.display = 'none';
+            startBtn.style.display = 'none';
+            restartBtn.style.display = 'block';
             gameInterval = setInterval(gameLoop, 150);
         }
 
@@ -287,9 +287,9 @@
             startGame();
         });
 
-        // 初始绘制
+        // 初始状态
         initGame();
-        draw();
+        isGameRunning = false; // 确保初始状态为未开始
     </script>
 </body>
 </html>
