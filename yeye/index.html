@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爷爷的相册</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+        
+        .image-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            aspect-ratio: 9/16; /* 统一使用手机竖屏比例9:16 */
+        }
+        
+        .image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-container:hover .image-info {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .image-container {
+                aspect-ratio: 2/3; /* 在小屏幕上使用稍宽的比例 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>爷爷的相册</h1>
+        <p>燕子的优秀爷爷</p>
+    </header>
+    
+    <div class="gallery">
+        <!-- 照片1 -->
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/gusiyuan-lxy01/tuku/main/457635771-94cd2e46-9b0c-413b-b635-fc7cf8dafec3.jpg" alt="竖屏照片1">
+            <div class="image-info">
+                <h3>康复顺利</h3>
+                <p>2025年拍摄</p>
+            </div>
+        </div>
+        
+        <!-- 照片2 -->
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/gusiyuan-lxy01/tuku/main/mmexport1750324217487.jpg" alt="竖屏照片2">
+            <div class="image-info">
+                <h3>墨镜帅哥</h3>
+                <p>2025年拍摄</p>
+            </div>
+        </div>
+        
+        <!-- 照片3 -->
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/gusiyuan-lxy01/tuku/main/mmexport1750324221205.jpg" alt="竖屏照片3">
+            <div class="image-info">
+                <h3>遮阳帽帅哥</h3>
+                <p>2025年拍摄</p>
+            </div>
+        </div>
+        
+        <!-- 照片4 -->
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/gusiyuan-lxy01/tuku/main/mmexport1750324229877.jpg" alt="竖屏照片4">
+            <div class="image-info">
+                <h3>新衣服新气象</h3>
+                <p>2025年拍摄</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
